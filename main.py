@@ -18,7 +18,7 @@ def send_slack_message(message, channel):
 def main():
     for cluster in clusters:
         # 메시지 제목 설정
-        header = f":loudspeaker: *『인사총무팀 공지』* <!channel>\n\n"
+        header = f":loudspeaker: *『인사총무팀 공지』*\n\n"
 
         notice_msg = (
             f"안녕하세요? 평택 클러스터 구성원 여러분!\n\n쾌적하고 안전한 셔틀버스 이용을 위해 다음과 같이 에티켓을 공지 드리오니\n클러스터 구성원 여러분들의 협조 부탁드리겠습니다.\n\n"
