@@ -1,26 +1,43 @@
 import os
-
+import sys
+import datetime
 import arrow
 from dotenv import load_dotenv
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 from kurly import clusters
 
-# 환경 변수에서 Slack 토큰, 채널을 로드
+# 🎯 한국 공휴일 목록 (YYYY-MM-DD 형식)
+HOLIDAYS = {
+    "2025-01-01",  # 신정
+    "2025-10-06",  # 추석
+}
+
+# 📆 오늘 날짜 가져오기
+today = datetime.date.today().strftime("%Y-%m-%d")
+
+# 🚫 오늘이 공휴일이면 실행하지 않고 종료
+if today in HOLIDAYS:
+    print(f"📢 오늘({today})은 공휴일이므로 실행하지 않습니다.")
+    sys.exit(0)
+
+# 환경 변수에서 Slack 토큰 로드
 load_dotenv()
 SLACK_TOKEN = os.environ.get("SLACK_TOKEN")
+
 def send_slack_message(message, channel):
     try:
         client = WebClient(token=SLACK_TOKEN)
         client.chat_postMessage(channel=channel, text=message)
     except SlackApiError as e:
-        print(f"Error sending message to {channel} : {e}")
+        print(f"⚠️ Error sending message to {channel} : {e}")
+
 def main():
     for cluster in clusters:
         # 메시지 제목 설정
         header = f":loudspeaker: *『인사총무팀 공지』*\n\n"
 
-        notice_msg = (
+         notice_msg = (
             f"안녕하세요? 평택 클러스터 구성원 여러분!\n\n쾌적하고 안전한 셔틀버스 이용을 위해 다음과 같이 에티켓을 공지 드리오니\n클러스터 구성원 여러분들의 협조 부탁드리겠습니다.\n\n"
             f"\n"
             f"\n"
