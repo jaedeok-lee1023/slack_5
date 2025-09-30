@@ -25,6 +25,7 @@ if today in HOLIDAYS:
 load_dotenv()
 SLACK_TOKEN = os.environ.get("SLACK_TOKEN")
 
+
 def send_slack_message(message, channel):
     try:
         client = WebClient(token=SLACK_TOKEN)
@@ -32,14 +33,16 @@ def send_slack_message(message, channel):
     except SlackApiError as e:
         print(f"⚠️ Error sending message to {channel} : {e}")
 
+
 def main():
     for cluster in clusters:
         # 메시지 제목 설정
         header = f":loudspeaker: *『인사총무팀 공지』*\n\n"
 
-         notice_msg = (
-            f"안녕하세요? 평택 클러스터 구성원 여러분!\n\n쾌적하고 안전한 셔틀버스 이용을 위해 다음과 같이 에티켓을 공지 드리오니\n클러스터 구성원 여러분들의 협조 부탁드리겠습니다.\n\n"
-            f"\n"
+        notice_msg = (
+            f"안녕하세요? 평택 클러스터 구성원 여러분!\n\n"
+            f"쾌적하고 안전한 셔틀버스 이용을 위해 다음과 같이 에티켓을 공지 드리오니\n"
+            f"클러스터 구성원 여러분들의 협조 부탁드리겠습니다.\n\n"
             f"\n"
             f":k체크: 셔틀버스 내부에서 *음식,음료 취식 하지 않기!*\n"
             f":k체크: 셔틀버스 탑승 간 *전화통화,옆 대화 지양하기!*\n"
@@ -48,16 +51,16 @@ def main():
             f":k체크: 셔틀버스 탑승 후 꼭! *안전벨트 착용하기!*\n"
             f"*:point_right: (Click) - *<https://static.wixstatic.com/media/50072f_7c74424ba81a44dbb8d3d6a237467890~mv2.png|셔틀버스 에티켓>*\n"
             f"\n"
-            f"\n"
             f"*문의사항 : 인사총무팀 총무/시설 담당자*\n\n"
             f"감사합니다.\n"
         )
- 
+
         # 메시지 본문
         body = header + notice_msg
 
         # 슬랙 채널에 전송
         send_slack_message(body, cluster.channel)
+
 
 if __name__ == "__main__":
     main()
