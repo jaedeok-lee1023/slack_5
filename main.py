@@ -51,7 +51,7 @@ def main():
             f":k체크: 셔틀버스 탑승 후 꼭! *안전벨트 착용하기!*\n"
             f"*:point_right: (Click) - *<https://static.wixstatic.com/media/50072f_7c74424ba81a44dbb8d3d6a237467890~mv2.png|셔틀버스 에티켓>*\n"
             f"\n"
-            f"*문의사항 : 인사총무팀 총무/시설 담당자*\n\n"
+            f"*문의사항 : FC운영표준화_통합RP_평택 담당자*\n\n"
             f"감사합니다.\n"
         )
 
